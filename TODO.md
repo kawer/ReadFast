@@ -1,4 +1,4 @@
-#TODO list:
+# TODO list:
 - [ ] Add words per minute selector
 - [ ] Highlight current word in completeText
 - [ ] Add Pause button
