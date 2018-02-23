@@ -1,0 +1,5 @@
+- [ ] Add words per minute selector
+- [ ] Highlight current word in completeText
+- [ ] Add Pause button
+- [ ] Word displayed goes to word user selects in completeText
+- [ ] Drag and drop pdf
