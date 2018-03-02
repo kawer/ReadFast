@@ -17,11 +17,14 @@ var data = `When an object is initialized with another object of the same type, 
 
 completeText.textContent = data;
 
+//window.addEventListener("keydown", checkKeyPressed, false);
+
 function reader(toRead) {
     let ind = 0;
     let wordList = toRead.split(" ");
 
     function readWord() {
+
         let splitted = data.split(' ');
         completeText.innerHTML = splitted.slice(0, ind).join(' ')
             + ' <i id="highlight">' + splitted[ind] + '</i> '
