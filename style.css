@@ -6,6 +6,10 @@ body {
     display: flex;
 }
 
+#highlight {
+    background: yellow;
+}
+
 #wordbox {
     width: 100%;
     display: flex;
