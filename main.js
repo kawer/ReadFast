@@ -1,7 +1,6 @@
 
 var wordel = document.querySelector("#word");
 var completeText = document.querySelector("#completeText");
-
 var infoel = document.querySelector("#info");
 
 var wpm = 200;
@@ -17,21 +16,60 @@ var data = `When an object is initialized with another object of the same type, 
 
 completeText.textContent = data;
 
+class Word {
+    constructor(content, s, e) {
+        this.content = content;
+        this.s = s;
+        this.e = e;
+    }
+}
+
 function reader(toRead) {
+
     let ind = 0;
-    let wordList = toRead.split(" ");
+
+    function buildList(toRead) {
+        let l = [];
+        let startBound = 0;
+        for (i = 0; i < toRead.length; i++) {
+            let c = toRead.charAt(i);
+            if (c === ' ') {
+                l.push(new Word(toRead.substring(startBound, i), startBound, i))
+                startBound = i;
+            }
+        }
+        l.push(new Word(toRead.substring(startBound, i), startBound, i))
+        return l;
+    }
+
+    completeText.addEventListener("click", (e) => {
+        debugger
+        s = window.getSelection();
+        var range = s.getRangeAt(0);
+        var node = s.anchorNode;
+        while (range.toString().indexOf(' ') != 0) {
+            range.setStart(node, (range.startOffset - 1));
+        }
+        let clickIndex = range.startOffset;
+        let i = 0;
+        while (wordList[i].s < clickIndex)
+            i++;
+        ind = i;
+    });
+
+    let wordList = buildList(toRead);
 
     function readWord() {
-        let splitted = data.split(' ');
-        completeText.innerHTML = splitted.slice(0, ind).join(' ')
-            + ' <i id="highlight">' + splitted[ind] + '</i> '
-            + splitted.slice(ind + 1).join(' ');
+        if (ind >= wordList.length)
+            return;
+        completeText.innerHTML = wordList.slice(0, ind).map(w => w.content).join(' ')
+            + ' <em id="highlight">' + wordList[ind].content + '</em> '
+            + wordList.slice(ind + 1).map(w => w.content).join(' ');
 
-        wordel.textContent = wordList[ind++];
+        wordel.textContent = wordList[ind++].content;
 
         setTimeout(readWord, ms);
     }
-
     setTimeout(readWord, ms);
 }
 
