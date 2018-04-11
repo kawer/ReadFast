@@ -23,6 +23,7 @@ class Word {
         this.e = e;
     }
 }
+//window.addEventListener("keydown", checkKeyPressed, false);
 
 function reader(toRead) {
 
